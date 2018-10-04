@@ -2,13 +2,13 @@
 <div class="container">
   <%= link_to 'Back', blogs_path, class: 'btn btn-info my-4' %>
 <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="<%= @blog.image%>" alt="Card image cap">
+  <%= image_tag @blog.image, class: 'img-responsive', height: '300px' %>
   <div class="card-body">
     <h5 class="card-title"><%= @blog.title%></h5>
     <p class="card-text"><%= @blog.body%></p>
   </div>
   <!-- IF USER IS LOGGED IN, THEIR BLOG WILL SHOW OTHERWISE IT WONT -->
-  <% if @blog.user.id == current_user.id %>
+  <% if user_signed_in? && @blog.user.id == current_user.id %>
   <div class="card-footer">
     <%= link_to 'Edit', edit_blog_path(@blog) %> |
     <%= link_to 'Destroy', @blog, method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -16,26 +16,6 @@
   <% end %>
 </div>
 </div>
-
-<p>
-  <strong>Title:</strong>
-  <%= @blog.title %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @blog.body %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= @blog.image %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @blog.user_id %>
-</p>
 
 <%= link_to 'Edit', edit_blog_path(@blog) %> |
 <%= link_to 'Back', blogs_path %>

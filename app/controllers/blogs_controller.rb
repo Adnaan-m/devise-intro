@@ -26,6 +26,7 @@ class BlogsController < ApplicationController
   def create
     @blog = Blog.new(blog_params)
     @blog.user = current_user
+    @blog.image.attach(params[:blog][:image])
 
     respond_to do |format|
       if @blog.save
